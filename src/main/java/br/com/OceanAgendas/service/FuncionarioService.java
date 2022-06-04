@@ -1,13 +1,13 @@
 package br.com.OceanAgendas.service;
 
 import br.com.OceanAgendas.entity.Funcionario;
-import br.com.OceanAgendas.entity.Funcionario;
 import br.com.OceanAgendas.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class FuncionarioService implements GenericCrud<Funcionario> {
 
     @Autowired

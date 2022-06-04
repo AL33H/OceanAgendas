@@ -4,9 +4,11 @@ import br.com.OceanAgendas.entity.Agendamento;
 import br.com.OceanAgendas.repository.AgendamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AgendamentoService implements GenericCrud<Agendamento> {
 
     @Autowired
