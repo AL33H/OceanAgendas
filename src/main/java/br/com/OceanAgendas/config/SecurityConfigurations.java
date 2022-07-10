@@ -3,6 +3,9 @@ package br.com.OceanAgendas.config;
 import br.com.OceanAgendas.repository.UsuarioRepository;
 import br.com.OceanAgendas.service.AutenticacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.actuate.context.ShutdownEndpoint;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -44,10 +47,18 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/swagger-ui").permitAll()
+                .antMatchers("/swagger-ui/*").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2-console/*").permitAll()
                 .antMatchers("/actuator").permitAll()
                 .antMatchers("/actuator/*").permitAll()
+                .requestMatchers(EndpointRequest.to(ShutdownEndpoint.class))
+                .hasRole("ACTUATOR_ADMIN")
+                .requestMatchers(EndpointRequest.toAnyEndpoint())
+                .permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .permitAll()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
@@ -61,6 +72,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/**.html",
+                "/swagger-ui/**",
+                "/v3/api-docs/**");
     }
 
 }
