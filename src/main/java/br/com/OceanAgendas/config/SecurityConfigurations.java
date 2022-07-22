@@ -1,7 +1,7 @@
 package br.com.OceanAgendas.config;
 
 import br.com.OceanAgendas.repository.UsuarioRepository;
-import br.com.OceanAgendas.service.AutenticacaoService;
+import br.com.OceanAgendas.service.AutenticacaoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.context.ShutdownEndpoint;
@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AutenticacaoService autenticacaoService;
+    private AutenticacaoServiceImpl autenticacaoService;
 
     @Autowired
     private TokenService tokenService;

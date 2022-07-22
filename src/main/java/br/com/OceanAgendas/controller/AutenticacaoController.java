@@ -3,6 +3,7 @@ package br.com.OceanAgendas.controller;
 import br.com.OceanAgendas.DTO.LoginFormDTO;
 import br.com.OceanAgendas.DTO.TokenDTO;
 import br.com.OceanAgendas.config.TokenService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,12 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AutenticacaoController {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
     private TokenService tokenService;
 
     @PostMapping

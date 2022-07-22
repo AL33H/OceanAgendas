@@ -1,40 +1,16 @@
 package br.com.OceanAgendas.service;
 
 import br.com.OceanAgendas.entity.Funcionario;
-import br.com.OceanAgendas.repository.FuncionarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
-public class FuncionarioService implements GenericCrud<Funcionario> {
 
-    @Autowired
-    FuncionarioRepository funcionarioRepository;
+public interface FuncionarioService {
 
-    public ResponseEntity<List<Funcionario>> findAll() {
-        List<Funcionario> listaClientes = funcionarioRepository.findAll();
+    List<Funcionario> findAll();
 
-        if (listaClientes.isEmpty()) return ResponseEntity.notFound().build();
+    Funcionario findById(Long Id);
 
-        return ResponseEntity.ok(listaClientes);
-    }
+    Funcionario save(Funcionario Funcionario);
 
-    @Override
-    public ResponseEntity<Funcionario> findById(Long Id) {
-        return funcionarioRepository.findById(Id)
-                .map(Funcionario -> ResponseEntity.ok().body(Funcionario)).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @Override
-    public ResponseEntity<Funcionario> save(Funcionario Funcionario) {
-        return ResponseEntity.ok(funcionarioRepository.save(Funcionario));
-    }
-
-    @Override
-    public ResponseEntity<Funcionario> delete(Funcionario Funcionario) {
-        funcionarioRepository.delete(Funcionario);
-        return ResponseEntity.ok().build();
-    }
+    void delete(Funcionario Funcionario);
 }
